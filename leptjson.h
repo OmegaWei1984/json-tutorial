@@ -12,7 +12,7 @@ typedef enum {
 }lept_type;
 
 typedef struct {
-	lept_type type
+	lept_type type;
 }lept_value;
 
 int lept_parse(lept_value* v, const char* json);

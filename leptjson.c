@@ -29,7 +29,7 @@ static int lept_parse_null(lept_context* c, lept_value* v) {
 /* true = "true" */
 static int lept_parse_true(lept_context* c, lept_value* v) {
 	EXPECT(c, 't');
-	if (c->json[0] != 'u' || c->json[1] != 'r' || c->json[2] != 'e')
+	if (c->json[0] != 'r' || c->json[1] != 'u' || c->json[2] != 'e')
 		return LEPT_PARSE_INVALID_VALUE;
 	c->json += 3;
 	v->type = LEPT_TRUE;

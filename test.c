@@ -20,6 +20,14 @@ static int test_pass = 0;
 
 #define EXPECT_EQ_INT(expect, actual) EXPECT_EQ_BASE((expect) == (actual), expect, actual, "%d")
 
+#define TEST_ERROR(error, json)\
+    do {\
+        lept_value v;\
+        v.type = LEPT_FALSE;\
+        EXPECT_EQ_INT(error, lept_parse(&v, json));\
+        EXPECT_EQ_INT(LEPT_NULL, lept_get_type(&v));\
+    } while (0)
+
 static void test_parse_null() {
     lept_value v;
     v.type = LEPT_FALSE;
@@ -41,10 +49,16 @@ static void test_parse_false() {
     EXPECT_EQ_INT(LEPT_FALSE, lept_get_type(&v));
 }
 
+static void test_parse_expect_value() {
+    TEST_ERROR(LEPT_PARSE_EXPECT_VALUE, "");
+    TEST_ERROR(LEPT_PARSE_EXPECT_VALUE, " ");
+}
+
 static void test_parse() {
     test_parse_null();
     test_parse_true();
     test_parse_false();
+    test_parse_expect_value();
 }
 
 int main() {
